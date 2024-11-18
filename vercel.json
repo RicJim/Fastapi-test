@@ -8,11 +8,5 @@
         "pythonVersion": "3.10"
       }
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/api/index.py"
-    }
   ]
 }
