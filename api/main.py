@@ -10,7 +10,10 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Cambiar "*" por los dominios específicos en producción
+    allow_origins=[
+        "http://localhost:3000",
+        "https://bird-app-nextjs-pwa.vercel.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -29,12 +32,14 @@ async def favicon():
 @app.post("/mel_spectrogram")
 def hello_nextjs(file: UploadFile = File(...)):
     try:
-        mel_message = mel_spectrogram(file)
+        segments = mel_spectrogram(file)
+
+        serializable_segments = [segment.tolist() for segment in segments]
 
         return JSONResponse(
             content={
-                "message": "Tareas completadas exitosamente.",
-                "details": [mel_message],
+                "message": "Archivo procesado exitosamente.",
+                "segments": serializable_segments,
             },
             status_code=200,
         )
