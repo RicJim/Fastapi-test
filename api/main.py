@@ -2,7 +2,6 @@ from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from mangum import Mangum
 import os
 
 from .audio_process import mel_spectrogram
@@ -21,8 +20,6 @@ app.add_middleware(
 )
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
-
-handler = Mangum(app)
 
 @app.get("/")
 async def hello_fast_api():
