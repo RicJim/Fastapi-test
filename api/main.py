@@ -13,6 +13,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "https://bird-app-nextjs-pwa.vercel.app",
+        "https://bird-app-nextjs-pwa-production.up.railway.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
