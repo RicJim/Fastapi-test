@@ -17,7 +17,10 @@ def mel_spectrogram(file):
             segment = audio[start:start + sample_length]
             if len(segment) < sample_length:
                 segment = np.pad(segment, (0, sample_length - len(segment)))
-            mfcc = librosa.feature.mfcc(y=segment, sr=sr, n_mfcc=num_mfcc)
+            else:
+                segment = segment[:sample_length]
+            
+            mfcc = librosa.feature.mfcc(y=segment, sr=sr, n_mfcc=num_mfcc).astype(np.float32)
             segments.append(mfcc.T)
 
         print("Entró en mel_spectrogram y procesó el archivo")
